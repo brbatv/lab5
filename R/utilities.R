@@ -9,14 +9,19 @@ get_json_response_from_url<-function(url){ #takes raw response from server. we m
   require(httr)
   #clean data ? remove first elements of the list maybe
   
-  return(GET(url))
+  return(fromJSON(content(GET(url),as="text")))
 }
 
 url<-add_api_key_to_url("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=")
 
 
 
-
+create_url_from_address<-function(address,...)
+{}
+create_url_from_coordinates<-function(log,lat,...)
+{
+  
+}
 
 display_json<-function(){ # prints the entire json a nice way 
   
