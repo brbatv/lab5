@@ -1,17 +1,19 @@
 #functions needed for development but won't be exported
 
+# URL PART 
 add_api_key_to_url<-function(url) #simply adds my api key to a google api request at the end
 {
   return(paste0(url,"&key=AIzaSyApGO2vCAE8dw7MhpKN2esy7cIDxtk8PiY"))
 }
 
-get_json_response_from_url<-function(url){ #takes raw response from server. we may need to clean it
+get_json_response_from_url<-function(url){ #takes json response frome server
   require(httr)
   require(jsonlite)
-
+  
   #return(content(GET(url)))
-
-  return(fromJSON(content(GET(url),as="text")))
+  json<-fromJSON(content(GET(url),as="text"))
+  if(json$status!="OK"){stop("Didn't find anything or request rejected from server")}
+  return(json)
 
 }
 
@@ -49,11 +51,11 @@ create_url_from_address<-function(address,...)
 
 
 #reverse geocoding
-create_url_from_coordinates<-function(long,lat,...)
+create_url_from_coordinates<-function(latlong,...)
 {
  
   
-  latlng<-paste(lat,long,sep=",")
+  latlng<-paste(latlong,collapse=",")
   
   url <-paste0("https://maps.googleapis.com/maps/api/geocode/json?latlng=", latlng)
   
@@ -75,11 +77,18 @@ create_url_from_coordinates<-function(long,lat,...)
   }
 }
 
-get_formatted_adress_from_url<-function(url)
-{ json<-get_json_response_from_url(url)
-  stopifnot(json$status=="OK")
-  return(json$results[[1]]$formatted_address)
+# DISPLAY PART
+get_formatted_address_from_json<-function(json) # gives back formatted address string
+{
+  return(json$results$formatted_address)
 }
-display_json<-function(){ # prints the entire json a nice way 
-  
+
+get_address_components_from_json<-function(json) # gives back adress components dataframe
+{
+  return(json$results$address_components[[1]]) 
+}
+get_coordinates_from_json<-function(json) #gives back numeric vector with longitude and latitude 
+{
+  return(as.numeric(json$results$geometry$location[1]))
+
 }
