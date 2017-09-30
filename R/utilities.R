@@ -7,8 +7,9 @@ add_api_key_to_url<-function(url) #simply adds my api key to a google api reques
 
 get_json_response_from_url<-function(url){ #takes raw response from server. we may need to clean it
   require(httr)
+  require(jsonlite)
 
-  return(content(GET(url)))
+  #return(content(GET(url)))
 
   return(fromJSON(content(GET(url),as="text")))
 
@@ -74,6 +75,11 @@ create_url_from_coordinates<-function(long,lat,...)
   }
 }
 
+get_formatted_adress_from_url<-function(url)
+{ json<-get_json_response_from_url(url)
+  stopifnot(json$status=="OK")
+  return(json$results[[1]]$formatted_address)
+}
 display_json<-function(){ # prints the entire json a nice way 
   
 }
