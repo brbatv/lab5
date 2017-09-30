@@ -90,8 +90,10 @@ get_address_components_from_json<-function(json) # gives back adress components 
 }
 get_coordinates_from_json<-function(json) #gives back numeric vector with longitude and latitude 
 {
-  return(as.numeric(json$results$geometry$location[1]))
+  output<-as.numeric(json$results$geometry$location[1,])
+  names(output)=c("Latitude","Longitude")
+  return(output)
 }
 
-#a<-get_json_response_from_url(create_url_from_address("2 sq de tocqueville 78150 chesnay"))
-#b<-get_json_response_from_url(create_url_from_coordinates(c(12,12)))
+a<-get_json_response_from_url(create_url_from_address("2 sq de tocqueville 78150 chesnay"))
+b<-get_json_response_from_url(create_url_from_coordinates(c(12,12)))
