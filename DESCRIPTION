@@ -11,6 +11,6 @@ License: GPL
 Imports:
     httr,
     jsonlite
-Suggests: ,
+Suggests:
     testthat
 RoxygenNote: 6.0.1
