@@ -92,3 +92,6 @@ get_coordinates_from_json<-function(json) #gives back numeric vector with longit
   return(as.numeric(json$results$geometry$location[1]))
 
 }
+
+#a<-get_json_response_from_url(create_url_from_address("2 sq de tocqueville 78150 chesnay"))
+#b<-get_json_response_from_url(create_url_from_coordinates(c(12,12)))
