@@ -4,7 +4,6 @@ test_that("error when wrong inputs",{
   expect_error(address$new("apdoeporpaoofjrizfjriezfjir789zrf78rz"))
 })
 
-test_that("good")
-{
-  
-}
+test_that("good",{
+  expect_true(1==1)
+})

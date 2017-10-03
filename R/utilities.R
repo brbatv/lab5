@@ -7,11 +7,9 @@ add_api_key_to_url<-function(url) #simply adds my api key to a google api reques
 }
 
 get_json_response_from_url<-function(url){ #takes json response frome server
-  require(httr)
-  require(jsonlite)
   
   #return(content(GET(url)))
-  json<-fromJSON(content(GET(url),as="text"))
+  json<-jsonlite::fromJSON(httr::content(httr::GET(url),as="text"))
   if(json$status!="OK"){stop("Didn't find anything or request rejected from server")}
   return(json)
 
