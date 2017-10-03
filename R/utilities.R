@@ -84,9 +84,10 @@ get_formatted_address_from_json<-function(json) # gives back formatted address s
 }
 
 get_address_components_from_json<-function(json) # gives back adress components dataframe
-{
-  return(json$results$address_components[[1]]) 
-}
+{ a<-json$results$address_components[[1]]
+  a[3]<-sapply(a[[3]],function(x) x[1]) # removes "political" in types field (useless) 
+  return(a) 
+} 
 get_coordinates_from_json<-function(json) #gives back numeric vector with longitude and latitude 
 {
   output<-as.numeric(json$results$geometry$location[1,])
