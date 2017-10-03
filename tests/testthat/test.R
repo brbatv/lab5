@@ -5,5 +5,5 @@ test_that("error when wrong inputs",{
 })
 
 test_that("good",{
-  expect_true(1==1)
+  expect_true(1+1==2)
 })
