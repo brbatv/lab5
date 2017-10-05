@@ -10,7 +10,9 @@ get_json_response_from_url<-function(url){ #takes json response frome server
   
   #return(content(GET(url)))
   json<-jsonlite::fromJSON(httr::content(httr::GET(url),as="text"))
-  if(json$status!="OK"){stop("Didn't find anything or request rejected from server")}
+  if(json$status=="ZERO_RESULTS") {stop("Nothing found")}
+  if(json$status=="INVALID_REQUEST"){stop("Invalid request")}
+  else if(json$status!="OK"){stop("Other error")}
   return(json)
 
 }
