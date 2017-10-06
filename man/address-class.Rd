@@ -8,12 +8,16 @@
 \description{
 A RC class to create address objects
 }
+\details{
+Please look at the vignette.
+}
 \section{Fields}{
 
 \describe{
-\item{\code{address}}{A character address to look for}
-
-\item{\code{latlong}}{A 2-lentghed numeric vector with longitude and latitude}
+\item{\code{address_or_coordinates}}{A character address to look for OR A 2-lentghed numeric vector with longitude and latitude}
 }}
 
 
+\examples{
+my_address<-address$new("Linkoping university")
+}

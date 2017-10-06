@@ -2,18 +2,13 @@
 \alias{lab5ab-package}
 \alias{lab5ab}
 \docType{package}
-\title{
-\packageTitle{lab5ab}
-}
+\title{RC class for Google Geooding API}
 \description{
 \packageDescription{lab5ab}
 }
-\details{
+\details{ Please look at the vignette
 
-The DESCRIPTION file:
-\packageDESCRIPTION{lab5ab}
-\packageIndices{lab5ab}
-~~ An overview of how to use the package, including the most important functions ~~
+
 }
 \author{
 \packageAuthor{lab5ab}
@@ -22,4 +17,5 @@ Maintainer: \packageMaintainer{lab5ab}
 }
 \keyword{ package }
 \examples{
+my_address<-address$new("linkoping university")
 }

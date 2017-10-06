@@ -1,9 +1,9 @@
 #functions needed for development but won't be exported
 
 # URL PART 
-add_api_key_to_url<-function(url) #simply adds my api key to a google api request at the end
+add_api_key_to_url<-function(url,key="AIzaSyApGO2vCAE8dw7MhpKN2esy7cIDxtk8PiY") #simply adds my api key to a google api request at the end
 {
-  return(paste0(url,"&key=AIzaSyApGO2vCAE8dw7MhpKN2esy7cIDxtk8PiY"))
+  return(paste0(url,"&key=",key))
 }
 
 get_json_response_from_url<-function(url){ #takes json response frome server
