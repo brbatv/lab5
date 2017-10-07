@@ -1,0 +1,74 @@
+---
+title: "RC class for Google Geooding API"
+author: "Bruno Barakat"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The lab5ab package provides a RC class named `address` to use geocoding and reverse geocoding from Google API.
+
+## Creating a address object
+In order to create an object of address class, you need to give either an character address or a numeric vector of latitude or longitude. 
+
+```{r,include=FALSE}
+library(devtools)
+install_github("brbatv/lab5",force=TRUE)
+library(lab5ab)
+address_or_coordinates<-"Paris"
+```
+```{r,results="hide"}
+
+my_address<-address$new(address_or_coordinates)
+````
+
+The constructor will recognize what is the type of the argument (address or coordinates) and tell you if you give wrong inputs.
+
+### Add special filters
+You can give optional parameters to the constructor, and theses are the ones available in the google API documention. For extra reference, please see <https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes> and <https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering>
+
+A example of use can be found below :
+```{r,eval=FALSE}
+
+my_address<-address$new("Toledo",region="ES")
+my_address<-address$new("Santa Cruz",components="country:ES")
+````
+
+
+### Change the API key
+In order to change the API key, you'll need to open utilities.R and change the key inside the `add_api_key_to_url` function. By default the key of the creator is used. 
+
+## Getting the results in different ways
+Address class has 3 fields : `$Coordinates` , `$Components` and `$Formatted_Address`
+
+1. `$Coordinates` gives back a named numeric vector of the most precise result found by Google. 
+
+2. `$Formatted_Address` gives back a character of all possible results found by Google.
+
+3. `$Components` gives back a more detailed data frame on the location of the most precise result found by Google.
+
+
+## Examples :
+###Search by address
+```{r}
+#Search by address
+my_address<-address$new("33 av des champs elysees Paris")
+my_address$Formatted_Address
+my_address$Components
+my_address$Coordinates
+
+````
+### Search by coordinates
+```{r}
+#Search by coordinates
+my_address<-address$new(c(58.39784,15.57601))
+my_address$Formatted_Address
+my_address$Components
+my_address$Coordinates
+
+````
+
+
